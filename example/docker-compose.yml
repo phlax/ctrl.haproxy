@@ -2,7 +2,7 @@
 
 version: "2.1"
 services:
-  haproxy-system:
+  haproxy-server:
     image: haproxy
     tty: true
     volumes:
