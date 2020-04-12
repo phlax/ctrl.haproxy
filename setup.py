@@ -26,7 +26,7 @@ extras_require['test'] = [
 
 setup(
     name='ctrl.haproxy',
-    version='0.0.2',
+    version='0.0.1',
     description='ctrl.haproxy',
     long_description="ctrl.haproxy",
     url='https://github.com/phlax/ctrl.haproxy',
