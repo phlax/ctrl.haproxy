@@ -16,11 +16,5 @@ class Haproxyctl(object):
     async def backends(self):
         print("getting FRONTENDS in utility")
 
-    async def enable(self, service: str):
-        print("enabling SERVICE in utility: %s" % service)
-
-    async def disable(self, service: str):
-        print("disabling SERVICE in utility: %s" % service)
-
     async def configure(self):
         print("configuring SERVICES in utility")
