@@ -1,0 +1,13 @@
+
+export APP_NAME=ctrlhap
+export APP_USERNAME=ctrlhap
+export SYSTEM_PKGS="\
+       libdbus-1-3 \
+       curl \
+       git"
+export BUILD_PKGS="\
+       build-essential \
+       pkg-config \
+       python3-dev"
+export EGGS="\
+       git+https://github.com/phlax/ctrl.haproxy#egg=ctrl.haproxy"
