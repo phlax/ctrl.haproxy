@@ -11,6 +11,34 @@ install:
   - make image
   - docker pull haproxy
 
+  # haproxy is up and pipe is accessible to second container
+  - docker-compose exec systemd-system ls /var/run/haproxy | grep admin1.sock
+  - docker-compose run systemd-client ls -lh /var/run/haproxy | grep admin1.sock
+
+  - $SYSTEMD_CTRL frontends
+  - $SYSTEMD_CTRL backends
+
+  # this probs should not happen here 8/
+  - docker-compose run --entrypoint "/bin/bash -c" systemd-client "chown -R ctrlhap:ctrlhap /var/lib/ctrl"
+
+  - SERVICES=`cat services.json` && echo $SERVICES
+  - docker-compose run haproxy-client bash -ec "echo \"$SERVICES\" > /var/lib/ctrl/services"
+  - docker-compose run --entrypoint "/bin/bash -c" haproxy-client "ls /var/lib/ctrl"
+  - # docker-compose run systemd-client bash -ec "cat /var/lib/ctrl/services"
+
+  - $SYSTEMD_CTRL frontends
+  - $SYSTEMD_CTRL backends
+
+  - $SYSTEMD_CTRL configure
+  - $SYSTEMD_CTRL frontends
+  - $SYSTEMD_CTRL backends
+
+  - # docker-compose run systemd-client echo "$NEWSERVICES" > /var/lib/ctrl/services
+
+  - $SYSTEMD_CTRL configure
+  - $SYSTEMD_CTRL frontends
+  - $SYSTEMD_CTRL backends
+
 script:
   - HAPROXY_CTRL="docker-compose run haproxy-client run_shell ctrl haproxy"
   - cd example
