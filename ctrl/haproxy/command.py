@@ -18,8 +18,11 @@ class HaproxySubcommand(object):
     async def handle(self, command: str, *args, **kwargs):
         return await getattr(self, 'handle_%s' % command.replace("-", "_"))(*args, **kwargs)
 
-    async def handle_services(self, *args, **kwargs):
-        await self.systemctl.services()
+    async def handle_frontends(self, *args, **kwargs):
+        await self.systemctl.frontends()
+
+    async def handle_backends(self, *args, **kwargs):
+        await self.systemctl.backends()
 
     async def handle_configure(self, *args, **kwargs):
         await self.systemctl.configure()

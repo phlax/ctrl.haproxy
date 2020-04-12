@@ -26,7 +26,7 @@ class CtrlHaproxyExtension(CtrlExtension):
             provides=IConfiguration,
             name='haproxy')
         component.provideUtility(
-            HaproxySystemctl(),
+            Haproxyctl(),
             provides=IHttpctl)
 
 

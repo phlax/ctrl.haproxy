@@ -11,10 +11,10 @@ from ctrl.core.interfaces import IHttpctl
 class Haproxyctl(object):
 
     async def frontends(self):
-        print("getting FRONTENDS in utility: %s" % service)
+        print("getting FRONTENDS in utility")
 
     async def backends(self):
-        print("getting FRONTENDS in utility: %s" % service)
+        print("getting FRONTENDS in utility")
 
     async def enable(self, service: str):
         print("enabling SERVICE in utility: %s" % service)
