@@ -10,11 +10,13 @@ services:
       - ./haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg
 
   haproxy-client:
+
     image: ctrl-haproxy
     environment:
       CTRL_MODULES: ctrl.core,ctrl.command,ctrl.haproxy
     volumes:
       - sockets-haproxy:/var/run/haproxy
+      - ./ctrl:/var/lib/ctrl:rw
 
   haproxy-dev-client:
     extends: haproxy-client
