@@ -10,10 +10,14 @@ install:
   - cat .docker
   - make image
   - docker pull haproxy
+  - cd example
+
+script:
+  - SYSTEMD_CTRL="docker-compose run systemd-client run_shell ctrl systemd"
 
   # haproxy is up and pipe is accessible to second container
-  - docker-compose exec systemd-system ls /var/run/haproxy | grep admin1.sock
-  - docker-compose run systemd-client ls -lh /var/run/haproxy | grep admin1.sock
+  - docker-compose exec haproxy-server ls /var/run/haproxy | grep admin1.sock
+  - docker-compose run haproxy-client ls -lh /var/run/haproxy | grep admin1.sock
 
   - $SYSTEMD_CTRL frontends
   - $SYSTEMD_CTRL backends
