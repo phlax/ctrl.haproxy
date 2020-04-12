@@ -9,7 +9,7 @@ before_install:
 install:
   - cat .docker
   - make image
-  - docker pull phlax/haproxy
+  - docker pull haproxy
 
 script:
   - HAPROXY_CTRL="docker-compose run haproxy-client run_shell ctrl haproxy"
