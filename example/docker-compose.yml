@@ -1,0 +1,36 @@
+#
+
+version: "2.1"
+services:
+  haproxy-system:
+    image: phlax/haproxy
+    tty: true
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
+      - haproxy:/etc/haproxy/system
+      - sockets:/var/run/dbus/
+      - ./10-system-user.rules:/etc/polkit-1/rules.d/10-system-user.rules:ro
+    tmpfs:
+    - /run
+    - /run/lock
+    - /tmp
+
+  haproxy-client:
+    image: ctrl-haproxy
+    environment:
+      CTRL_MODULES: ctrl.core,ctrl.command,ctrl.haproxy
+    volumes:
+      - sockets:/var/run/dbus
+      - haproxy:/var/haproxy
+      - ./ctrl:/var/lib/ctrl:rw
+
+  haproxy-dev-client:
+    extends: haproxy-client
+    environment:
+      DEV_EGGS: src/*/
+    volumes:
+      - ..:/app/ctrlsys/src/ctrl.haproxy
+
+volumes:
+  haproxy:
+  sockets:
