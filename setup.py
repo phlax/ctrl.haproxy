@@ -14,9 +14,7 @@ install_requires = [
      "@git+https://github.com/phlax/ctrl.config#egg=ctrl.config"),
     ("ctrl.command"
      "@git+https://github.com/phlax/ctrl.command#egg=ctrl.command"),
-    'dbussy',
-    'pyyaml',
-    'haproxy-python']
+    "haproxyadmin"]
 extras_require = {}
 extras_require['test'] = [
     "pytest",
