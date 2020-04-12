@@ -2,7 +2,7 @@
 from zope import component, interface
 
 from ctrl.core.interfaces import (
-    IConfiguration, ICtrlConfig, ISystemctl, ISubcommand)
+    IConfiguration, ICtrlConfig, IHttpctl, ISubcommand)
 
 
 @interface.implementer(ISubcommand)
@@ -13,7 +13,7 @@ class HaproxySubcommand(object):
 
     @property
     def systemctl(self):
-        return component.getUtility(ISystemctl)
+        return component.getUtility(IHttpctl)
 
     async def handle(self, command: str, *args, **kwargs):
         return await getattr(self, 'handle_%s' % command.replace("-", "_"))(*args, **kwargs)

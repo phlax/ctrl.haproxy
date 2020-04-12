@@ -4,11 +4,11 @@ from zope import component
 from ctrl.core.extension import CtrlExtension
 from ctrl.core.interfaces import (
     ICommandRunner, IConfiguration, ICtrlExtension,
-    ISubcommand, ISystemctl)
+    ISubcommand, IHttpctl)
 
 from .command import HaproxySubcommand
 from .config import HaproxyConfiguration
-from .systemctl import HaproxySystemctl
+from .systemctl import Haproxyctl
 
 
 class CtrlHaproxyExtension(CtrlExtension):
@@ -27,7 +27,7 @@ class CtrlHaproxyExtension(CtrlExtension):
             name='haproxy')
         component.provideUtility(
             HaproxySystemctl(),
-            provides=ISystemctl)
+            provides=IHttpctl)
 
 
 # register the extension
